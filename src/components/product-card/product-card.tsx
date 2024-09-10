@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, CardMedia, Typography} from '@mui/material';
+import {Card, CardContent, CardMedia, Grid, Typography} from '@mui/material';
 import {Product} from "../../utils/types.ts";
 
 
@@ -14,17 +14,18 @@ function ProductCard({products}: ProductCardProps) {
     // };
 
     return (
-        <Card>
+        <Grid container spacing={2}>
+
             {
                 products?.map((product) => (
-                    <>
-                        <Box key={product.id}>
+                    <> <Grid item xs={12} sm={6} md={4}>
+                        <Card>
                             <CardMedia
                                 component="img"
                                 height="140"
                                 image={product.image}
                                 alt={product.title}/>
-                            <CardContent>
+                            <CardContent key={product.id}>
                                 <Typography variant="h5">{product.title}</Typography>
                                 <Typography variant="body2">Цена: {product.price}</Typography>
                                 {/*<Typography variant="body2">Просмотры: {product.views}</Typography>*/}
@@ -33,11 +34,12 @@ function ProductCard({products}: ProductCardProps) {
                                 {/*    Посмотреть*/}
                                 {/*</Button>*/}
                             </CardContent>
-                        </Box>
+                        </Card>
+                    </Grid>
                     </>
                 ))
             }
-        </Card>
+        </Grid>
     );
 }
 

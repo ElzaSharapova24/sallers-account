@@ -14,7 +14,6 @@ function CreateProductModal ({ open, onClose }: CreateProductModalProps) {
     const [image, setImage] = useState('');
 
     const handleSubmit = () => {
-        // Logic for creating a product
         onClose();
     };
 
