@@ -11,16 +11,6 @@
       "imageUrl": "https://plus.unsplash.com/premium_photo-1724017317790-4bd39fc105eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      "id": "2",
-      "name": "Ведро снега",
-      "description": "Последняя возможность купить по выгодной цене!",
-      "price": 3000,
-      "createdAt": "2023-08-12T20:16:55.351Z",
-      "views": 77832,
-      "likes": 45666,
-      "imageUrl": "https://plus.unsplash.com/premium_photo-1724017317790-4bd39fc105eb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxM3x8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
       "id": "3",
       "name": "Плащ невидимка",
       "price": 10000000,
@@ -67,6 +57,46 @@
       "views": 200000,
       "likes": 302,
       "imageUrl": "https://images.unsplash.com/photo-1725988415840-b69ae3328e96?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyNXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "813f",
+      "name": "стул",
+      "description": "стул с пиками",
+      "price": 34,
+      "createdAt": "2024-09-11T19:11:44.887Z",
+      "views": 0,
+      "likes": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1725913137143-8f160e27852c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1Mnx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "98d0",
+      "name": "стол",
+      "description": "стод",
+      "price": 3434,
+      "createdAt": "2024-09-11T19:13:39.250Z",
+      "views": 0,
+      "likes": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1719937206158-cad5e6775044?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw2Nnx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "7fcd",
+      "name": "мишка",
+      "description": "сгорел",
+      "price": 5434,
+      "createdAt": "2024-09-11T19:14:07.668Z",
+      "views": 0,
+      "likes": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1725834518927-0e3444887039?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3OHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "id": "be9d",
+      "name": "микроб",
+      "description": "МИПРОЛ",
+      "price": 12123,
+      "createdAt": "2024-09-11T19:15:37.505Z",
+      "views": 0,
+      "likes": 0,
+      "imageUrl": "https://images.unsplash.com/photo-1710268470228-6d77e6d999b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw4N3x8fGVufDB8fHx8fA%3D%3D"
     }
   ],
   "orders": [

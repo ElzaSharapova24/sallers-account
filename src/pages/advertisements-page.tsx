@@ -5,7 +5,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 
 import CreateProductModal from "../components/create-advertisement-modal/create-product-modal.tsx";
 import AdvertisementCard from "../components/advertisement-card/advertisement-card.tsx";
-import Pagination from "../components/pagination/pagination.tsx";
+import BackButton from "../components/back-button/back-button.tsx";
 
 
 function AdvertisementsPage() {
@@ -15,8 +15,11 @@ function AdvertisementsPage() {
         getAdvertisements().then((advertisements: Advertisement[]) => setAdvertisements(advertisements));
     }, []);
 
+    const addAdvertisement = (advertisement: Advertisement)=> {
+        setAdvertisements(old => old.concat(advertisement));
+    }
+
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [openModal, setOpenModal] = useState<boolean>(false);
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +28,11 @@ function AdvertisementsPage() {
 
     return (
         <Box>
+            <BackButton/>
             <Typography variant="h1" gutterBottom>Все объявления</Typography>
+            <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
+                Создать новое объявление
+            </Button>
             <TextField
                 label="Поиск"
                 value={searchTerm}
@@ -33,19 +40,9 @@ function AdvertisementsPage() {
                 fullWidth
                 margin="normal"
             />
-            <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
-                Создать новое объявление
-            </Button>
 
             <AdvertisementCard advertisements={advertisements} />
-
-            <Pagination
-                totalItems={advertisements.length}
-                itemsPerPage={itemsPerPage}
-                onPageChange={(page) => console.log(page)}
-                onItemsPerPageChange={(value) => setItemsPerPage(value)} currentPage={0}/>
-
-            <CreateProductModal open={openModal} onClose={() => setOpenModal(false)}/>
+            <CreateProductModal open={openModal} onClose={() => setOpenModal(false)} addAdvertisement={addAdvertisement}/>
         </Box>
     );
 }

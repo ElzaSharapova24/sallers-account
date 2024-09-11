@@ -3,9 +3,9 @@ import {Advertisement, Order} from "./types.ts";
 const BaseUrl = 'http://localhost:3000';
 
 // Получение всех объявлений с опциональной пагинацией, сортировкой и фильтрацией
-export const getAdvertisements = async (): Promise<Advertisement[]> => {
+export const getAdvertisements = async (start: number = 0, limit: number = 10, sortBy: string = 'price', filterLikes: number = 0): Promise<Advertisement[]> => {
     try {
-        const response = await fetch(`${BaseUrl}/advertisements`);
+        const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes=${filterLikes}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -16,11 +16,6 @@ export const getAdvertisements = async (): Promise<Advertisement[]> => {
     }
 };
 
-
-// export const getAdvertisements = async (start: number = 0, limit: number = 10, sortBy: string = 'price', filterLikes: number = 0) => {
-//     const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes=${filterLikes}`);
-//     return response.json();
-// };
 
 // Получение конкретного объявления по ID
 export const getAdvertisementById = async (id: string | undefined) => {
@@ -37,7 +32,7 @@ export const getAdvertisementById = async (id: string | undefined) => {
 };
 
 // Создание нового объявления
-export const createAdvertisement = async (data: Advertisement[]) => {
+export const createAdvertisement = async (data: Partial<Advertisement>) : Promise<Advertisement> => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements`, {
             method: 'POST',

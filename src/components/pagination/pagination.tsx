@@ -1,4 +1,4 @@
-import {Box, MenuItem, Pagination, Select, Typography} from '@mui/material';
+import { Box, MenuItem, Pagination, Select, Typography } from '@mui/material';
 
 interface PaginationComponentProps {
     totalItems: number;
@@ -17,6 +17,10 @@ const PaginationComponent = ({
                              }: PaginationComponentProps) => {
 
     const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    if (totalItems === 0) {
+        return <Typography variant="body2">Нет товаров для отображения.</Typography>;
+    }
 
     return (
         <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>

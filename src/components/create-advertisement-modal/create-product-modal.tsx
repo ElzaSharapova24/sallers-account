@@ -1,25 +1,52 @@
-
-import { Modal, Box, TextField, Button } from '@mui/material';
+import {Modal, Box, TextField, Button} from '@mui/material';
 import {useState} from "react";
+import {createAdvertisement} from "../../utils/api.ts";
+import {Advertisement} from "../../utils/types.ts";
 
 interface CreateProductModalProps {
-    open: boolean;
-    onClose: () => void;
+    open: boolean,
+    onClose: () => void,
+    addAdvertisement: (advertisement: Advertisement) => void
 }
 
-function CreateProductModal ({ open, onClose }: CreateProductModalProps) {
+function CreateProductModal({open, onClose, addAdvertisement}: CreateProductModalProps) {
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
 
-    const handleSubmit = () => {
-        onClose();
+    const handleSubmit = async () => {
+        const newProduct = {
+            name: name,
+            description: description,
+            price: price,
+            createdAt: new Date().toISOString(),
+            views: 0,
+            likes: 0,
+            imageUrl: image,
+        };
+
+        try {
+            const createdAdvertisement = await createAdvertisement(newProduct);
+            addAdvertisement(createdAdvertisement);
+            console.log('Advertisement created successfully');
+
+            // Очистка формы
+            setName('');
+            setPrice(0);
+            setDescription('');
+            setImage('');
+
+            onClose();
+        } catch (error) {
+            console.error('Failed to create advertisement:', error);
+        }
     };
+
 
     return (
         <Modal open={open} onClose={onClose}>
-            <Box sx={{ p: 4, backgroundColor: 'white', margin: 'auto', width: 400 }}>
+            <Box sx={{p: 4, backgroundColor: 'white', margin: 'auto', width: 400}}>
                 <TextField
                     label="Название"
                     value={name}
@@ -29,7 +56,7 @@ function CreateProductModal ({ open, onClose }: CreateProductModalProps) {
                 />
                 <TextField
                     label="Стоимость"
-                    type="number"
+                    type="sting"
                     value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
                     fullWidth

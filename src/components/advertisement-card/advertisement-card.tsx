@@ -9,15 +9,13 @@ interface AdvertisementsCardProps {
 
 function AdvertisementCard({advertisements}: AdvertisementsCardProps) {
     const navigate = useNavigate();
-    const path = advertisements?.filter((e) => e.id)
-
+    const advertisementsId = advertisements?.filter((e) => e.id)
     const handleViewProduct = () => {
-        navigate(`/advertisements/${path}`);
+        navigate(`/advertisements/${advertisementsId}`);
     };
 
     return (
         <Grid container spacing={2}>
-
             {
                 advertisements?.map((advertisement) => (
                     <>
@@ -30,7 +28,7 @@ function AdvertisementCard({advertisements}: AdvertisementsCardProps) {
                                     height="140"
                                     image={advertisement.imageUrl}
                                     alt={advertisement.name}/>
-                                <CardContent key={advertisement.id} sx={{minHeight: '150px'}}>
+                                <CardContent key={advertisement.id} sx={{minHeight: '150px', height: '200px'}}>
                                     <Typography variant="h5">{advertisement.name}</Typography>
                                     <Typography variant="body2">Цена: {advertisement.price}</Typography>
                                     <Typography variant="body2">Просмотры: {advertisement.views}</Typography>

@@ -1,6 +1,7 @@
 import {Button, Card, CardContent, Grid, ListItemButton, Typography} from '@mui/material';
 import {Order} from "../../utils/types.ts";
 import {Link as RouterLink} from "react-router-dom";
+import BackButton from "../back-button/back-button.tsx";
 
 
 interface OrderCardProps {
@@ -9,9 +10,10 @@ interface OrderCardProps {
 
 function OrderCard({orders}: OrderCardProps) {
     return (
-        <Grid container spacing={2}>
-            {
-                orders?.map((order) => (
+        <>
+            <BackButton/>
+            <Grid container spacing={2}>
+                {orders?.map((order) => (
                     <Grid item xs={12} sm={6} md={4}>
                         <Card>
                             <CardContent sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -27,9 +29,9 @@ function OrderCard({orders}: OrderCardProps) {
                             </CardContent>
                         </Card>
                     </Grid>
-                ))
-            }
-        </Grid>
+                ))}
+            </Grid>
+        </>
     );
 }
 

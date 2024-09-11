@@ -2,7 +2,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import {Advertisement} from "../utils/types.ts";
 import {deleteAdvertisement, getAdvertisementById, updateAdvertisement} from "../utils/api.ts";
-import {Button, Card, CardContent, CardMedia, Container, Stack, TextField, Typography} from "@mui/material";
+import {Button, Card, CardContent, CardMedia, Container, Skeleton, Stack, TextField, Typography} from "@mui/material";
+import BackButton from "../components/back-button/back-button.tsx";
 
 function AdvertisementDetailPage() {
     const {id} = useParams<{ id: string }>();
@@ -41,30 +42,62 @@ function AdvertisementDetailPage() {
         navigate('/advertisements'); // Перенаправление на страницу всех объявлений после удаления
     };
 
-    if (!advertisement) return <div>Loading...</div>;
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h4" gutterBottom>
-                {advertisement.name}
-            </Typography>
+            <BackButton/>
+
+            {!advertisement ? (
+                // Скелетон для загрузки названия объявления
+                <Skeleton variant="text" width="60%" height={40}/>
+            ) : (
+                <Typography variant="h4" gutterBottom>
+                    {advertisement.name}
+                </Typography>
+            )}
+
             <Card>
-                <CardMedia
-                    component="img"
-                    height="200"
-                    image={advertisement.imageUrl}
-                    alt={advertisement.name}
-                />
+                {!advertisement ? (
+                    // Скелетон для изображения
+                    <Skeleton variant="rectangular" height={200} width={300}/>
+                ) : (
+                    <CardMedia
+                        component="img"
+                        height="200"
+                        image={advertisement.imageUrl}
+                        alt={advertisement.name}
+                    />
+                )}
+
                 <CardContent>
-                    <Typography variant="h6">Price: {advertisement.price}$</Typography>
-                    <Typography variant="body1">Views: {advertisement.views}</Typography>
-                    <Typography variant="body1">Likes: {advertisement.likes}</Typography>
-                    <Typography variant="body2">{advertisement.description}</Typography>
+                    {!advertisement ? (
+                        // Скелетоны для текстового содержимого
+                        <>
+                            <Skeleton variant="text" width="40%" height={30}/>
+                            <Skeleton variant="text" width="20%" height={30}/>
+                            <Skeleton variant="text" width="20%" height={30}/>
+                            <Skeleton variant="text" width="100%" height={20}/>
+                        </>
+                    ) : (
+                        <>
+                            <Typography variant="h6">Price: {advertisement.price}$</Typography>
+                            <Typography variant="body1">Views: {advertisement.views}</Typography>
+                            <Typography variant="body1">Likes: {advertisement.likes}</Typography>
+                            <Typography variant="body2">{advertisement.description}</Typography>
+                        </>
+                    )}
                 </CardContent>
             </Card>
 
             <Stack spacing={2} marginTop={2}>
-                {isEditing ? (
+                {!advertisement ? (
+                    // Скелетоны для кнопок
+                    <>
+                        <Skeleton variant="rectangular" height={40}/>
+                        <Skeleton variant="rectangular" height={40}/>
+                        <Skeleton variant="rectangular" height={40}/>
+                    </>
+                ) : isEditing ? (
                     <>
                         <TextField
                             label="Name"
@@ -105,13 +138,15 @@ function AdvertisementDetailPage() {
                         </Button>
                     </>
                 ) : (
-                    <Button variant="contained" color="secondary" onClick={handleEditToggle}>
-                        Edit Advertisement
-                    </Button>
+                    <>
+                        <Button variant="contained" color="secondary" onClick={handleEditToggle}>
+                            Edit Advertisement
+                        </Button>
+                        <Button variant="contained" color="error" onClick={handleDelete}>
+                            Delete Advertisement
+                        </Button>
+                    </>
                 )}
-                <Button variant="contained" color="error" onClick={handleDelete}>
-                    Delete Advertisement
-                </Button>
             </Stack>
         </Container>
     );

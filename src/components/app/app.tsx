@@ -16,10 +16,10 @@ function App() {
 
     return (
         <Box display="flex">
-            <Sidebar/>
             <Box component="main">
                 <Routes>
-                    <Route path="/announcements" element={<AdvertisementsPage/>}/>
+                    <Route path="/" element={ <Sidebar/>}/>
+                    <Route path="/advertisements" element={<AdvertisementsPage/>}/>
                     <Route path="/advertisements/:id" element={<AdvertisementDetailPage />} />
                     <Route path="/orders" element={<OrdersPage/>}/>
                     <Route path="/orders/:id" element={<OrderCard/>}/>
