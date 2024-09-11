@@ -1,18 +1,18 @@
 import {Box, Button, TextField, Typography} from '@mui/material';
-import {getProducts} from "../utils/api.ts";
-import {Product} from "../utils/types.ts";
+import {getAdvertisements} from "../utils/api.ts";
+import {Advertisement} from "../utils/types.ts";
 import {ChangeEvent, useEffect, useState} from "react";
 
-import CreateProductModal from "../components/create-product-modal/create-product-modal.tsx";
-import ProductCard from "../components/product-card/product-card.tsx";
+import CreateProductModal from "../components/create-advertisement-modal/create-product-modal.tsx";
+import AdvertisementCard from "../components/advertisement-card/advertisement-card.tsx";
 import Pagination from "../components/pagination/pagination.tsx";
 
 
-function ProductsPage() {
-    const [products, setProducts] = useState<Product[]>([]);
+function AdvertisementsPage() {
+    const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
     useEffect(() => {
-        getProducts().then((products: Product[]) => setProducts(products));
+        getAdvertisements().then((advertisements: Advertisement[]) => setAdvertisements(advertisements));
     }, []);
 
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -22,7 +22,6 @@ function ProductsPage() {
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     };
-
 
     return (
         <Box>
@@ -38,10 +37,10 @@ function ProductsPage() {
                 Создать новое объявление
             </Button>
 
-            <ProductCard products={products} />
+            <AdvertisementCard advertisements={advertisements} />
 
             <Pagination
-                totalItems={products.length}
+                totalItems={advertisements.length}
                 itemsPerPage={itemsPerPage}
                 onPageChange={(page) => console.log(page)}
                 onItemsPerPageChange={(value) => setItemsPerPage(value)} currentPage={0}/>
@@ -51,4 +50,4 @@ function ProductsPage() {
     );
 }
 
-export default ProductsPage;
+export default AdvertisementsPage;

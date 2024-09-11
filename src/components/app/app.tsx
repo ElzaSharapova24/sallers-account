@@ -6,10 +6,10 @@ import '@fontsource/roboto/700.css';
 import {Route, Routes} from 'react-router-dom';
 import {Box} from "@mui/material";
 import Sidebar from "../sidebar/sidebar.tsx";
-import Navbar from "../navbar/navbar.tsx";
-import ProductsPage from "../../pages/products-page.tsx";
+import AdvertisementsPage from "../../pages/advertisements-page.tsx";
 import OrdersPage from "../../pages/orders-page.tsx";
-import ProductDetailPage from "../../pages/product-detail-page.tsx";
+import AdvertisementDetailPage from "../../pages/advertisement-detail-page.tsx";
+import OrderCard from "../order-card/order-card.tsx";
 
 
 function App() {
@@ -18,15 +18,15 @@ function App() {
         <Box display="flex">
             <Sidebar/>
             <Box component="main">
-                <Navbar/>
                 <Routes>
-                    <Route path="/" element={<ProductsPage/>}/>
-                    <Route path="/product/:id" element={<ProductDetailPage/>}/>
+                    <Route path="/announcements" element={<AdvertisementsPage/>}/>
+                    <Route path="/advertisements/:id" element={<AdvertisementDetailPage />} />
                     <Route path="/orders" element={<OrdersPage/>}/>
+                    <Route path="/orders/:id" element={<OrderCard/>}/>
                 </Routes>
             </Box>
         </Box>
     )
 }
 
-export default App
+export default App;

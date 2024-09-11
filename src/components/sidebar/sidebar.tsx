@@ -1,14 +1,14 @@
 import {Drawer, List, ListItemButton, ListItemText} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 
 function Sidebar() {
     return (
         <Drawer variant="permanent">
             <List>
-                <ListItemButton component={Link} to="/">
+                <ListItemButton component={RouterLink} to="/announcements">
                     <ListItemText primary="Объявления"/>
                 </ListItemButton>
-                <ListItemButton component={Link} to="/orders">
+                <ListItemButton component={RouterLink} to="/orders">
                     <ListItemText primary="Заказы"/>
                 </ListItemButton>
             </List>
