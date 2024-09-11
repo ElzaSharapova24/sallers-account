@@ -5,24 +5,24 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {Route, Routes} from 'react-router-dom';
 import {Box} from "@mui/material";
-import Sidebar from "../sidebar/sidebar.tsx";
+import Navigation from "../navigation/navigation.tsx";
 import AdvertisementsPage from "../../pages/advertisements-page.tsx";
 import OrdersPage from "../../pages/orders-page.tsx";
 import AdvertisementDetailPage from "../../pages/advertisement-detail-page.tsx";
-import OrderCard from "../order-card/order-card.tsx";
+import OrderDetailPage from "../../pages/order-detail-page.tsx";
 
 
 function App() {
 
     return (
         <Box display="flex">
-            <Sidebar/>
             <Box component="main">
                 <Routes>
-                    <Route path="/announcements" element={<AdvertisementsPage/>}/>
-                    <Route path="/advertisements/:id" element={<AdvertisementDetailPage />} />
+                    <Route path="/" element={<Navigation/>}/>
+                    <Route path="/advertisements" element={<AdvertisementsPage/>}/>
+                    <Route path="/advertisements/:id" element={<AdvertisementDetailPage/>}/>
                     <Route path="/orders" element={<OrdersPage/>}/>
-                    <Route path="/orders/:id" element={<OrderCard/>}/>
+                    <Route path="/orders/:orderId" element={<OrderDetailPage/>}/>
                 </Routes>
             </Box>
         </Box>

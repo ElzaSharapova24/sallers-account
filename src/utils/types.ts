@@ -10,8 +10,7 @@ export type Advertisement = {
 }
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const OrderStatus = {
+export const OrderStatus = {
     Created: 0,
     Paid: 1,
     Transport: 2,
@@ -22,7 +21,7 @@ const OrderStatus = {
 } as const;
 
 
-type OrderItem = Advertisement & { count: number; };
+export type OrderItem = Advertisement & { count: number; };
 
 export type Order = {
     id: string;
@@ -33,9 +32,9 @@ export type Order = {
     deliveryWay: string;
     total: number;
 }
-//
-export type Image = {
-    id: number;
-    url: string;
-    name: string;
-}
+
+// export type Image = {
+//     id: number;
+//     url: string;
+//     name: string;
+// }
