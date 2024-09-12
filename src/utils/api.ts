@@ -32,7 +32,7 @@ export const getAdvertisementById = async (id: string | undefined) => {
 };
 
 // Создание нового объявления
-export const createAdvertisement = async (data: Partial<Advertisement>) : Promise<Advertisement> => {
+export const createAdvertisement = async (data: Partial<Advertisement>): Promise<Advertisement> => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements`, {
             method: 'POST',
@@ -108,18 +108,20 @@ export const deleteAdvertisement = async (id: string | undefined) => {
 };
 
 // Получение всех заказов
-export const getOrders = async (start: number = 0, limit: number = 10) => {
+export const getOrders = async (statusFilter = '') => {
     try {
-        const response = await fetch(`${BaseUrl}/orders?_start=${start}&_limit=${limit}`);
+        const statusQuery = statusFilter !== '' ? `&status=${statusFilter}` : '';
+        const response = await fetch(`${BaseUrl}/orders?${statusQuery}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching orders:', error);
         throw new Error('Could not fetch Orders');
     }
 };
+
 
 // Получение конкретного заказа по ID
 export const getOrderById = async (id: string | undefined) => {
