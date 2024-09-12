@@ -70,7 +70,7 @@ function AdvertisementsPage() {
     };
 
     return (
-        <Box>
+        <Box component="section">
             <BackButton/>
             <Typography variant="h1" gutterBottom>Все объявления</Typography>
             <Button variant="contained" color="primary" onClick={() => setOpenModal(true)}>
@@ -82,8 +82,9 @@ function AdvertisementsPage() {
                 onChange={handleSearch}
                 fullWidth
                 margin="normal"
+                sx={{marginBottom: '10px'}}
             />
-            <Typography variant="h2" color="primary" textAlign={'left'} fontSize={20}>Сортировка</Typography>
+            <Typography variant="h2" color="primary" textAlign={'left'} fontSize={20} >Фильтр</Typography>
             <Box sx={{display: 'flex', paddingTop: '20px'}}>
 
                 {/* Элементы управления для фильтрации по лайкам */}

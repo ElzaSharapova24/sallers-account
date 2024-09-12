@@ -18,7 +18,7 @@ function AdvertisementCard({advertisements,}: AdvertisementsCardProps) {
         <Grid container spacing={2} pt={2}>
             {
                 advertisements?.map((advertisement) => (
-                    <Grid item xs={12} sm={6} md={4} key={advertisement.id}>
+                    <Grid item xs={12} sm={4} md={4} key={advertisement.id}>
                         <RouterLink to={`/advertisements/${advertisement.id}`}
                                     style={{textDecoration: 'none', color: 'inherit'}}>
                             <Card>

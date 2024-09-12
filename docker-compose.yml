@@ -1,0 +1,27 @@
+version: '3'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    container_name: marketplace-server
+    ports:
+      - "3000:3000"
+    networks:
+      - marketplace-network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    container_name: marketplace-client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server
+    networks:
+      - marketplace-network
+
+networks:
+  marketplace-network:
+    driver: bridge

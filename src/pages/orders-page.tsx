@@ -28,7 +28,7 @@ function OrdersPage() {
     });
 
     return (
-        <Box>
+        <Box component="section">
             <Typography variant="h1" gutterBottom>Заказы</Typography>
             <Box sx={{display: 'flex', justifyContent: 'space-between'}} mb={1}>
                 <Box>
@@ -45,7 +45,7 @@ function OrdersPage() {
                     </Select>
                 </Box>
                 <Button onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}>
-                    Сортировать по сумме ({sortOrder === 'asc' ? 'по убыванию' : 'по возрастанию'})
+                    Сортировать по сумме ({sortOrder === 'asc' ? 'по возрастанию' : 'по убыванию'})
                 </Button>
             </Box>
             <OrderCard orders={sortedOrders}/>
