@@ -7,10 +7,10 @@
 1. Установите Node.js и npm.
 2. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/your-username/marketplace-seller-dashboard.git
+   git clone git@github.com:ElzaSharapova24/sellers-account.git
    
 ## Перейдите в директорию проекта:
-1. cd marketplace-seller-dashboard
+1. cd sellers-account
 
 ## Установите зависимости:
 1. npm install
@@ -23,3 +23,6 @@
 1. "scripts": {
    "server": "json-server --watch db.json --port 8000"
    }
+
+## Запуск проекта
+1. npm run dev
