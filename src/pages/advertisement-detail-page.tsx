@@ -39,8 +39,9 @@ function AdvertisementDetailPage() {
 
     const handleDelete = async () => {
         await deleteAdvertisement(id);
-        navigate('/advertisements');
+        navigate('/advertisements'); // Перенаправление на страницу всех объявлений после удаления
     };
+
 
     return (
         <Container maxWidth="md">
@@ -48,17 +49,17 @@ function AdvertisementDetailPage() {
 
             {!advertisement ? (
                 // Скелетон для загрузки названия объявления
-                <Skeleton variant="text" width="60%" height={40} sx={{backgroundColor: 'grey.800'}}/>
+                <Skeleton variant="text" width="60%" height={40}/>
             ) : (
                 <Typography variant="h4" gutterBottom>
                     {advertisement.name}
                 </Typography>
             )}
 
-            <Card sx={{width: '400px'}}>
+            <Card>
                 {!advertisement ? (
                     // Скелетон для изображения
-                    <Skeleton variant="rectangular" height={200} width={300} sx={{backgroundColor: 'grey.800'}}/>
+                    <Skeleton variant="rectangular" height={200} width={300}/>
                 ) : (
                     <CardMedia
                         component="img"
@@ -72,10 +73,10 @@ function AdvertisementDetailPage() {
                     {!advertisement ? (
                         // Скелетоны для текстового содержимого
                         <>
-                            <Skeleton variant="text" width="40%" height={30} sx={{backgroundColor: 'grey.800'}}/>
-                            <Skeleton variant="text" width="20%" height={30} sx={{backgroundColor: 'grey.800'}}/>
-                            <Skeleton variant="text" width="20%" height={30} sx={{backgroundColor: 'grey.800'}}/>
-                            <Skeleton variant="text" width="100%" height={20} sx={{backgroundColor: 'grey.800'}}/>
+                            <Skeleton variant="text" width="40%" height={30}/>
+                            <Skeleton variant="text" width="20%" height={30}/>
+                            <Skeleton variant="text" width="20%" height={30}/>
+                            <Skeleton variant="text" width="100%" height={20}/>
                         </>
                     ) : (
                         <>
@@ -92,9 +93,9 @@ function AdvertisementDetailPage() {
                 {!advertisement ? (
                     // Скелетоны для кнопок
                     <>
-                        <Skeleton variant="rectangular" height={40} sx={{backgroundColor: 'grey.800'}}/>
-                        <Skeleton variant="rectangular" height={40} sx={{backgroundColor: 'grey.800'}}/>
-                        <Skeleton variant="rectangular" height={40} sx={{backgroundColor: 'grey.800'}}/>
+                        <Skeleton variant="rectangular" height={40}/>
+                        <Skeleton variant="rectangular" height={40}/>
+                        <Skeleton variant="rectangular" height={40}/>
                     </>
                 ) : isEditing ? (
                     <>
@@ -151,4 +152,4 @@ function AdvertisementDetailPage() {
     );
 }
 
-export default AdvertisementDetailPage;
+export default AdvertisementDetailPage

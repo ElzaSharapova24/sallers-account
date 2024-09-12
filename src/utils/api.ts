@@ -3,20 +3,13 @@ import {Advertisement, Order} from "./types.ts";
 const BaseUrl = 'http://localhost:3000';
 
 // Получение всех объявлений с опциональной пагинацией, сортировкой и фильтрацией
-export const getAdvertisements = async (
-    start: number = 0,
-    limit: number = 10,
-    sortBy: string = 'price',
-    filterLikes: number = 0,
-    filterViews: number = 0 // Добавляем новый параметр для фильтрации по просмотрам
-): Promise<{ advertisements: Advertisement[]}> => {
+export const getAdvertisements = async (start: number = 0, limit: number = 10, sortBy: string = 'price', filterLikes: number = 0): Promise<Advertisement[]> => {
     try {
-        const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes_gte=${filterLikes}&views_gte=${filterViews}`);
+        const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes=${filterLikes}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const advertisements = await response.json();
-        return { advertisements};
+        return response.json();
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Could not fetch Advertisements');
@@ -25,7 +18,7 @@ export const getAdvertisements = async (
 
 
 // Получение конкретного объявления по ID
-export const getAdvertisementById = async (id: string | undefined): Promise<Advertisement> => {
+export const getAdvertisementById = async (id: string | undefined) => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements/${id}`);
         if (!response.ok) {
@@ -39,7 +32,7 @@ export const getAdvertisementById = async (id: string | undefined): Promise<Adve
 };
 
 // Создание нового объявления
-export const createAdvertisement = async (data: Partial<Advertisement>): Promise<Advertisement> => {
+export const createAdvertisement = async (data: Partial<Advertisement>) : Promise<Advertisement> => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements`, {
             method: 'POST',
@@ -59,7 +52,7 @@ export const createAdvertisement = async (data: Partial<Advertisement>): Promise
 };
 
 // Изменение объявления по ID (PUT)
-export const updateAdvertisement = async (id: string | undefined, data: Partial<Advertisement>): Promise<Advertisement> => {
+export const updateAdvertisement = async (id: string | undefined, data: Partial<Advertisement>) => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements/${id}`, {
             method: 'PUT',
@@ -79,7 +72,7 @@ export const updateAdvertisement = async (id: string | undefined, data: Partial<
 };
 
 // Частичное изменение объявления (PATCH)
-export const patchAdvertisement = async (id: string | undefined, data: Advertisement[]): Promise<Advertisement> => {
+export const patchAdvertisement = async (id: string | undefined, data: Advertisement[]) => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements/${id}`, {
             method: 'PATCH',
@@ -99,7 +92,7 @@ export const patchAdvertisement = async (id: string | undefined, data: Advertise
 };
 
 // Удаление объявления по ID
-export const deleteAdvertisement = async (id: string | undefined): Promise<Advertisement> => {
+export const deleteAdvertisement = async (id: string | undefined) => {
     try {
         const response = await fetch(`${BaseUrl}/advertisements/${id}`, {
             method: 'DELETE'
@@ -115,23 +108,21 @@ export const deleteAdvertisement = async (id: string | undefined): Promise<Adver
 };
 
 // Получение всех заказов
-export const getOrders = async (statusFilter = '') => {
+export const getOrders = async (start: number = 0, limit: number = 10) => {
     try {
-        const statusQuery = statusFilter !== '' ? `&status=${statusFilter}` : '';
-        const response = await fetch(`${BaseUrl}/orders?${statusQuery}`);
+        const response = await fetch(`${BaseUrl}/orders?_start=${start}&_limit=${limit}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Error fetching orders:', error);
+        console.error('Error:', error);
         throw new Error('Could not fetch Orders');
     }
 };
 
-
 // Получение конкретного заказа по ID
-export const getOrderById = async (id: string | undefined): Promise<Order> => {
+export const getOrderById = async (id: string | undefined) => {
     try {
         const response = await fetch(`${BaseUrl}/orders/${id}`);
         if (!response.ok) {
@@ -144,4 +135,39 @@ export const getOrderById = async (id: string | undefined): Promise<Order> => {
     }
 };
 
+// Изменение заказа по ID (PUT)
+export const updateOrder = async (id: string | undefined, data: Order[]) => {
+    try {
+        const response = await fetch(`${BaseUrl}/orders/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Could not update Order');
+    }
+};
+
+// Удаление заказа по ID
+export const deleteOrder = async (id: string | undefined) => {
+    try {
+        const response = await fetch(`${BaseUrl}/orders/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Could not delete Order');
+    }
+};
 
