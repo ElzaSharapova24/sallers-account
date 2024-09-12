@@ -35,18 +35,18 @@ function OrderDetailPage() {
         <Box sx={{p: 4}}>
             <BackButton/>
             <Typography variant="h4" gutterBottom mt={1}>
-                Детали заказа #{order.id}
+                Детали заказа #{order?.id}
             </Typography>
-            <Typography variant="body1">Статус: {order.status}</Typography>
-            <Typography variant="body1">Создан: {new Date(order.createdAt).toLocaleDateString()}</Typography>
-            <Typography variant="body1">Всего товаров: {order.items.length}</Typography>
-            <Typography variant="body1">Итоговая стоимость: {order.total} ₽</Typography>
+            <Typography variant="body1">Статус: {order?.status}</Typography>
+            <Typography variant="body1">Создан: {new Date(order?.createdAt).toLocaleDateString()}</Typography>
+            <Typography variant="body1">Всего товаров: {order?.items.length}</Typography>
+            <Typography variant="body1">Итоговая стоимость: {order?.total} ₽</Typography>
 
             <Typography variant="h5" sx={{mt: 3, mb: 2}}>
                 Товары в заказе:
             </Typography>
             <Grid container spacing={2}>
-                {order.items.map((item) => ( // Используем order.items
+                {order?.items.map((item) => ( // Используем order.items
                     <Grid item xs={12} sm={6} md={6} key={item.id}>
                         <Card sx={{boxShadow: '-1px 0px 10px 4px rgba(0,0,0,0.74)'}}>
                             <CardContent sx={{height: '200px', display: 'flex', flexDirection: 'column',}}>

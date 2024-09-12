@@ -122,10 +122,10 @@ function AdvertisementsPage() {
             <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Pagination
                     count={advertisements.length < limit ? page : page + 1} // Общее количество страниц
-                    page={page} // Текущая страница
-                    onChange={handlePageChange} // Обработчик изменения страницы
+                    page={page}
+                    onChange={handlePageChange}
                     color="primary"
-                    sx={{mt: 2}} // Отступ сверху
+                    sx={{mt: 2}}
                 />
 
                 {/* Элементы управления для выбора количества объявлений */}

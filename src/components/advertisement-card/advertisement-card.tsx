@@ -15,7 +15,7 @@ function AdvertisementCard({advertisements,}: AdvertisementsCardProps) {
 
 
     return (
-        <Grid container spacing={2} pt={'20px'}>
+        <Grid container spacing={2} pt={2}>
             {
                 advertisements?.map((advertisement) => (
                     <Grid item xs={12} sm={6} md={4} key={advertisement.id}>

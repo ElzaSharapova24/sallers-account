@@ -1,15 +1,22 @@
-import {Advertisement, Order} from "./types.ts";
+import {Advertisement} from "./types.ts";
 
 const BaseUrl = 'http://localhost:3000';
 
 // Получение всех объявлений с опциональной пагинацией, сортировкой и фильтрацией
-export const getAdvertisements = async (start: number = 0, limit: number = 10, sortBy: string = 'price', filterLikes: number = 0): Promise<Advertisement[]> => {
+export const getAdvertisements = async (
+    start: number = 0,
+    limit: number = 12,
+    sortBy: string = 'price',
+    filterLikes: number = 0,
+    filterViews: number = 0 // Добавляем новый параметр для фильтрации по просмотрам
+): Promise<{ advertisements: Advertisement[] }> => {
     try {
-        const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes=${filterLikes}`);
+        const response = await fetch(`${BaseUrl}/advertisements?_start=${start}&_limit=${limit}&_sort=${sortBy}&likes_gte=${filterLikes}&views_gte=${filterViews}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
+        const advertisements = await response.json();
+        return {advertisements};
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Could not fetch Advertisements');
@@ -137,39 +144,4 @@ export const getOrderById = async (id: string | undefined) => {
     }
 };
 
-// Изменение заказа по ID (PUT)
-export const updateOrder = async (id: string | undefined, data: Order[]) => {
-    try {
-        const response = await fetch(`${BaseUrl}/orders/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(data)
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    } catch (error) {
-        console.error('Error:', error);
-        throw new Error('Could not update Order');
-    }
-};
-
-// Удаление заказа по ID
-export const deleteOrder = async (id: string | undefined) => {
-    try {
-        const response = await fetch(`${BaseUrl}/orders/${id}`, {
-            method: 'DELETE'
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    } catch (error) {
-        console.error('Error:', error);
-        throw new Error('Could not delete Order');
-    }
-};
 
